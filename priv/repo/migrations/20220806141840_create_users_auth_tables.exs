@@ -11,6 +11,8 @@ defmodule Pento.Repo.Migrations.CreateUsersAuthTables do
       timestamps()
     end
 
+
+
     create unique_index(:users, [:email])
 
     create table(:users_tokens) do

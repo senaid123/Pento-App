@@ -1,8 +1,16 @@
 defmodule PentoWeb.WrongLive do
   use Phoenix.LiveView, layout: {PentoWeb.LayoutView, "live.html"}
 
-  def mount(_params, _session, socket) do
-    {:ok, assign(socket, rand_number: Enum.random(1..10), score: 0, message: "Make a guess")}
+  def mount(_params, session, socket) do
+    {
+      :ok,
+      assign(
+        socket,
+        score: 0,
+        message: "Guess a number.",
+        session_id: session["live_socket_id"]
+      )
+    }
   end
 
   def render(assigns) do
@@ -25,16 +33,16 @@ defmodule PentoWeb.WrongLive do
   def handle_event("restart", socket) do
     message = "Start new game"
     score = 0
-    {:noreply, assign(socket,
-    message: message,
-    score: score) }
+
+    {:noreply,
+     assign(socket,
+       message: message,
+       score: score
+     )}
   end
 
   def handle_event("guess", %{"number" => guess} = data, socket) do
-
-
-
-    if  to_string(socket.assigns.rand_number) == guess do
+    if to_string(socket.assigns.rand_number) == guess do
       message = "Your guess: #{is_binary(guess)} is RIGHTTT!!. Guess again. "
       score = socket.assigns.score + 1
 
