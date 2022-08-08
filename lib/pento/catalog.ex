@@ -8,6 +8,11 @@ defmodule Pento.Catalog do
 
   alias Pento.Catalog.Product
 
+
+
+
+
+
   @doc """
   Returns the list of products.
 
@@ -74,6 +79,26 @@ defmodule Pento.Catalog do
   end
 
   @doc """
+  Change price of the product
+  ## Examples
+  iex> markdown_product(product, :decrease, 21)
+  {:ok, %Product{}}
+
+  iex> markdown_product(product, :decrease, bad_value)
+  {:error, %Ecto.changeset{}}
+
+  """
+
+
+  def markdown_product(%Product{}= product, operation, amount) do
+    product
+    |> Product.changeset()
+    |> Product.price_changeset(operation,amount)
+    |> Repo.update!()
+ end
+
+
+  @doc """
   Deletes a product.
 
   ## Examples
@@ -101,4 +126,6 @@ defmodule Pento.Catalog do
   def change_product(%Product{} = product, attrs \\ %{}) do
     Product.changeset(product, attrs)
   end
+
+
 end
