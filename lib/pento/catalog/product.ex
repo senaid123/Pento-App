@@ -20,6 +20,8 @@ defmodule Pento.Catalog.Product do
     |> validate_number(:unit_price, greater_than: 0.0)
   end
 
+
+
   def price_changeset(changeset, operat, amount \\ 0) do
     changeset
     |> change_price(operat, amount)
