@@ -84,7 +84,7 @@ defmodule Pento.Catalog do
   iex> markdown_product(product, :decrease, 21)
   {:ok, %Product{}}
 
-  iex> markdown_product(product, :decrease, bad_value)
+  iex> markdown_product(product, :decrease, "some other value")
   {:error, %Ecto.changeset{}}
 
   """
