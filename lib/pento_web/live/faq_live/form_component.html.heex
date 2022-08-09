@@ -7,10 +7,11 @@
     id="faq-form"
     phx-target={@myself}
     phx-change="validate"
-    phx-submit="save">
+    phx-submit="save"
+    >
 
-    
     <%= label f, :username %>
+    <%= text_input f, :username %>
     <%= error_tag f, :username %>
   
     <%= label f, :questions %>
@@ -22,6 +23,7 @@
     <%= error_tag f, :answers %>
   
     <%= label f, :likes_count %>
+    <button><%=  %></button>
     <%= error_tag f, :likes_count %>
   
     <div>

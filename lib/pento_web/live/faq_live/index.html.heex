@@ -25,6 +25,7 @@
     </tr>
   </thead>
   <tbody id="faqs">
+  <%= @current_user.email %>
     <%= for faq <- @faqs do %>
       <tr id={"faq-#{faq.id}"}>
         <td><%= faq.username %></td>

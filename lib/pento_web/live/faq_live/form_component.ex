@@ -24,6 +24,10 @@ defmodule PentoWeb.FAQLive.FormComponent do
     {:noreply, assign(socket, :changeset, changeset)}
   end
 
+  def handle_event("vote", %{"faq" => faq_params}, socket) do
+
+  end
+
   def handle_event("save", %{"faq" => faq_params}, socket) do
     save_faq(socket, socket.assigns.action, faq_params)
   end
