@@ -1,0 +1,41 @@
+<h1>Show Faq</h1>
+
+<%= if @live_action in [:edit] do %>
+  <.modal return_to={Routes.faq_show_path(@socket, :show, @faq)}>
+    <.live_component
+      module={PentoWeb.FAQLive.FormComponent}
+      id={@faq.id}
+      title={@page_title}
+      action={@live_action}
+      faq={@faq}
+      return_to={Routes.faq_show_path(@socket, :show, @faq)}
+    />
+  </.modal>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Username:</strong>
+    <%= @faq.username %>
+  </li>
+
+  <li>
+    <strong>Questions:</strong>
+    <%= @faq.questions %>
+  </li>
+
+  <li>
+    <strong>Answers:</strong>
+    <%= @faq.answers %>
+  </li>
+
+  <li>
+    <strong>Likes count:</strong>
+    <%= @faq.likes_count %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.faq_show_path(@socket, :edit, @faq), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.faq_index_path(@socket, :index) %></span>
