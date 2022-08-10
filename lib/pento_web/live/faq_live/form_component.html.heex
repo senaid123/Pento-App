@@ -23,9 +23,9 @@
     <%= error_tag f, :answers %>
   
     <%= label f, :likes_count %>
-    <button><%=  %></button>
+   <%=text_input f, :likes_count %>
     <%= error_tag f, :likes_count %>
-  
+   <button><%=  %>Like</button>
     <div>
       <%= submit "Save", phx_disable_with: "Saving..." %>
     </div>
