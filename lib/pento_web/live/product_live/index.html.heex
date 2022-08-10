@@ -27,15 +27,16 @@
   <tbody id="products">
     <%= for product <- @products do %>
       <tr id={"product-#{product.id}"}>
-         
+           
+        <td><img src={product.image_upload} width="100px" /></td>
         <td><%=live_redirect product.name, to: Routes.product_show_path(@socket, :show, product) %></td> 
         <td><%= product.description %></td>
         <td><%= product.unit_price %></td>
         <td><%= product.sku %></td>
 
         <td>
-          <span><%= live_patch "Edit", to: Routes.product_index_path(@socket, :edit, product) %></span>
-          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: product.id, data: [confirm: "Are you sure?"] %></span>
+          <button style="background-color: black"><%= live_patch "Edit", to: Routes.product_index_path(@socket, :edit, product) %></button>
+          <button style="background-color: black"><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: product.id, data: [confirm: "Are you sure?"] %></button>
         </td>
       </tr>
     <% end %>
