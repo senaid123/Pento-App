@@ -16,6 +16,7 @@
 <table>
   <thead>
     <tr>
+      <th>Image</th>
       <th>Name</th>
       <th>Description</th>
       <th>Unit price</th>
@@ -35,8 +36,8 @@
         <td><%= product.sku %></td>
 
         <td>
-          <button style="background-color: black"><%= live_patch "Edit", to: Routes.product_index_path(@socket, :edit, product) %></button>
-          <button style="background-color: black"><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: product.id, data: [confirm: "Are you sure?"] %></button>
+          <button style="background-color: orange"><%= live_patch "Edit", to: Routes.product_index_path(@socket, :edit, product) %></button>
+          <button style="background-color: orange"><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: product.id, data: [confirm: "Are you sure?"] %></button>
         </td>
       </tr>
     <% end %>
