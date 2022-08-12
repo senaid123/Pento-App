@@ -8,11 +8,6 @@ defmodule Pento.Catalog do
 
   alias Pento.Catalog.Product
 
-
-
-
-
-
   @doc """
   Returns the list of products.
 
@@ -89,14 +84,12 @@ defmodule Pento.Catalog do
 
   """
 
-
-  def markdown_product(%Product{}= product, operation, amount) do
+  def markdown_product(%Product{} = product, operation, amount) do
     product
     |> Product.changeset()
-    |> Product.price_changeset(operation,amount)
+    |> Product.price_changeset(operation, amount)
     |> Repo.update!()
- end
-
+  end
 
   @doc """
   Deletes a product.
@@ -127,5 +120,8 @@ defmodule Pento.Catalog do
     Product.changeset(product, attrs)
   end
 
-
+  def list_products_with_user_rating(user) do
+    Product.Query.with_user_ratings()
+    |> Repo.all()
+  end
 end
