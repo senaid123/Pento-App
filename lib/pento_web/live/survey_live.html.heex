@@ -1,0 +1,8 @@
+<%= if @demographic do %>
+<DemographicLive.Show.details demographic={@demographic} />
+<% else %>
+<.live_component module={Form}
+id="demographic-form"
+
+user={@current_user} />
+<% end %>
