@@ -7,6 +7,8 @@ defmodule Pento.Survey do
   alias Pento.Repo
 
   alias Pento.Survey.Rating
+  alias Pento.Survey.Demographic
+  alias Pento.Survey.Demographic.Query
 
   @doc """
   Returns the list of ratings.
@@ -36,6 +38,14 @@ defmodule Pento.Survey do
 
   """
   def get_rating!(id), do: Repo.get!(Rating, id)
+
+
+
+
+  def get_demographic_by_user(user) do
+    Demographic.Query.for_user(user)
+    |> Repo.one()
+  end
 
   @doc """
   Creates a rating.
@@ -198,8 +208,5 @@ defmodule Pento.Survey do
     Demographic.changeset(demographic, attrs)
   end
 
-  def get_demographic_by_user(user) do
-    Demographic.Query.for_user(user)
-    |> Repo.one()
-  end
+
 end
