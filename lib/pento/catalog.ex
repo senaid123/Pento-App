@@ -9,6 +9,12 @@ defmodule Pento.Catalog do
   alias Pento.Catalog.Product
   alias Pento.Catalog.Product.Query
 
+
+
+  def list_products_with_user_rating(user) do
+    Product.Query.with_user_ratings(user)
+    |> Repo.all()
+  end
   @doc """
   Returns the list of products.
 
@@ -121,8 +127,4 @@ defmodule Pento.Catalog do
     Product.changeset(product, attrs)
   end
 
-  def list_products_with_user_rating(user) do
-    Product.Query.with_user_ratings()
-    |> Repo.all()
-  end
 end

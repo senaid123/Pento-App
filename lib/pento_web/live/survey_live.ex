@@ -1,8 +1,11 @@
 defmodule PentoWeb.SurveyLive do
   use PentoWeb, :live_view
+
   alias __MODULE__.Component
-  alias Pento.{Catalog, Accounts, Survey}
+  alias Pento.Survey
+  alias Pento.Catalog
   alias PentoWeb.DemographicLive
+  alias PentoWeb.RatingLive
 
   @impl true
   def mount(_params, _session, socket) do
@@ -12,12 +15,13 @@ defmodule PentoWeb.SurveyLive do
      |> assign_products()}
   end
 
+
   def assign_products(%{assigns: %{current_user: current_user}} = socket) do
     assign(socket, :products, list_products(current_user))
   end
 
   defp list_products(user) do
-   Catalog.list_products_with_user_rating(user)
+    Catalog.list_products_with_user_rating(user)
   end
 
   def assign_demographic(%{assigns: %{current_user: current_user}} = socket) do
@@ -36,4 +40,5 @@ defmodule PentoWeb.SurveyLive do
   def handle_info({:created_demographic, demographic}, socket) do
     {:noreply, handle_demographic_created(socket, demographic)}
   end
+
 end

@@ -11,6 +11,7 @@ defmodule PentoWeb.DemographicLive.Show do
         <ul class="text-4xl my-8 mx-4 flex flex-col gap-5">
           <li><b>Gender</b>: <%= @demographic.gender %></li>
           <li><b>Year of birth</b>: <%= @demographic.year_of_birth %></li>
+
         </ul>
       </div>
     """

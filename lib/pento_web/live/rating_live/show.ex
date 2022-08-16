@@ -9,12 +9,12 @@ defmodule PentoWeb.RatingLive.Show do
       |> Enum.join(" ")
 
     ~H"""
-    <div>
-    <h4>
-    <%= @product.name %>:<br/>
-    <%= raw stars %>
-    </h4>
-    </div>
+      <div>
+        <h4>
+          <%= @product.name %>:<br/>
+          <%= raw stars %>
+        </h4>
+      </div>
     """
   end
 
