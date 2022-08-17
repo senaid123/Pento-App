@@ -1,75 +1,76 @@
 defmodule PentoWeb.WrongLive do
   use Phoenix.LiveView, layout: {PentoWeb.LayoutView, "live.html"}
 
+  alias Pento.Accounts
+
   def mount(_params, session, socket) do
-    {
-      :ok,
-      assign(
-        socket,
+    random_number = Enum.random(1..10)
+
+    socket =
+      assign(socket,
         score: 0,
-        message: "Guess a number.",
-        session_id: session["live_socket_id"]
+        session_id: session["live_socket_id"],
+        random_number: random_number,
+        message: "Make g guess:"
       )
-    }
+
+    {:ok, assign(socket, score: 0, message: "Make a guess:")}
   end
 
   def render(assigns) do
     ~H"""
-    <h1>Your score: <%= @score %></h1>
-      <h2>
+      <h1>Your score: <%= @score %></h1>
+        <h2>
           <%= @message %>
-          It's  <%=time() %>
-      </h2>
-      <h2>
-        <%= for n <- 1..10 do %>
-          <a href="#" phx-click="guess" phx-value-number = {n} ><%= n %></a>
+        </h2>
+        <h2>
+          <%= for n <- 1..10 do %>
+          <a href="#" phx-click="guess" phx-value-number={n} ><%= n %></a>
         <% end %>
-    </h2>
+      </h2>
+      <pre>
+        <%= @current_user.email %>
+        <%= @session_id %>
+      </pre>
 
-    <button phx-click="restart" >Restart Game</button>
+      <button phx-click="restart"> Restart GAME </button>
     """
   end
 
   def handle_event("restart", socket) do
-    message = "Start new game"
+    message = "Here is your new game!!"
     score = 0
 
-    {:noreply,
-     assign(socket,
-       message: message,
-       score: score
-     )}
+    socket = assign(socket, message: message, score: score)
+
+    {:noreply, socket}
   end
 
   def handle_event("guess", %{"number" => guess} = data, socket) do
-    if to_string(socket.assigns.rand_number) == guess do
-      message = "Your guess: #{is_binary(guess)} is RIGHTTT!!. Guess again. "
-      score = socket.assigns.score + 1
+    case String.to_integer(guess) == socket.assigns.random_number do
+      true ->
+        message = "Your guess: #{guess}. Fantastic. YOU WINN!. "
+        score = socket.assigns.score + 1
 
-      {
-        :noreply,
-        assign(
-          socket,
-          message: message,
-          score: score
-        )
-      }
-    else
-      message = "Your guess: #{guess}. Wrong. Guess again. "
-      score = socket.assigns.score - 1
+        socket =
+          assign(socket,
+            score: score,
+            message: message
+          )
 
-      {
-        :noreply,
-        assign(
-          socket,
-          message: message,
-          score: score
-        )
-      }
+        {:noreply, socket}
+
+      false ->
+        message = "Your guess: #{guess}. Wrong. Guess again. "
+        score = socket.assigns.score - 1
+
+        socket =
+          assign(socket,
+            score: score,
+            message: message
+          )
+
+        {:noreply, socket}
     end
-  end
-
-  def time do
-    DateTime.utc_now() |> to_string()
   end
 end
