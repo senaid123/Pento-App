@@ -14,31 +14,34 @@
 <% end %>
 
 <table>
-  <thead>
-    <tr>
-      <th>Username</th>
-      <th>Questions</th>
-      <th>Answers</th>
-      <th>Likes count</th>
-
-      <th></th>
-    </tr>
-  </thead>
+ 
   <tbody id="faqs">
   <%= @current_user.email %>
     <%= for faq <- @faqs do %>
-      <tr id={"faq-#{faq.id}"}>
-        <td><%= faq.username %></td>
-        <td><%= faq.questions %></td>
-        <td><%= faq.answers %></td>
-        <td><%= faq.likes_count %></td>
+      <div style="background-color: gray; margin:10%;" id={"faq-#{faq.id}"}>
+        <div style="display: flex">
+        <h3>Username : </h3>
+        <%= faq.username %>
+        </div>
+        <div style="display:flex;">
+        <h4>Question : </h4>
+        <%= faq.questions %> 
+        </div>
+        <div style="display:flex">
+        <h5>Answer : </h5>
+        <%= faq.answers %>
+        </div>
+        <div style="display:flex">
+         <h5> Number of likes : </h5>
+         <%=  faq.likes_count %>
+         </div>
 
-        <td>
+        <div>
           <span><%= live_redirect "Show", to: Routes.faq_show_path(@socket, :show, faq) %></span>
           <span><%= live_patch "Edit", to: Routes.faq_index_path(@socket, :edit, faq) %></span>
           <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: faq.id, data: [confirm: "Are you sure?"] %></span>
-        </td>
-      </tr>
+        </div>
+      </div>
     <% end %>
   </tbody>
 </table>
