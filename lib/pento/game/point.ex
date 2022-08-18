@@ -5,11 +5,14 @@ defmodule Pento.Game.Point do
     {x + change_x, y + change_y}
   end
 
-  def transpose({x, y}), do: {y, x}
+  def maybe_reflect(point, true), do: reflect(point)
+  def maybe_reflect(point, false), do: point
+
+  def reflect({x, y}), do: {6 - x, y}
 
   def flip({x, y}), do: {x, 6 - y}
 
-  def reflect({x, y}), do: {6 - x, y}
+  def transpose({x, y}), do: {y, x}
 
   def rotate(point, 0), do: point
   def rotate(point, 90), do: point |> reflect |> transpose
@@ -25,7 +28,4 @@ defmodule Pento.Game.Point do
     |> move(location)
     |> center
   end
-
-  def maybe_reflect(point, true), do: reflect(point)
-  def maybe_reflect(point, false), do: point
 end
