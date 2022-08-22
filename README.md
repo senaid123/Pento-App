@@ -1,6 +1,6 @@
 # Pento
 
-### Link : 
+### Link : https://pento-liveview-app.fly.dev/
 
 To start your Phoenix server:
 
