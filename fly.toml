@@ -1,6 +1,6 @@
-# fly.toml file generated for pento-liveview-app on 2022-08-22T12:14:28+02:00
+# fly.toml file generated for phoenix-pento on 2022-08-23T16:37:23+02:00
 
-app = "pento-liveview-app"
+app = "phoenix-pento"
 kill_signal = "SIGTERM"
 kill_timeout = 5
 processes = []
@@ -9,7 +9,7 @@ processes = []
   release_command = "/app/bin/migrate"
 
 [env]
-  PHX_HOST = "pento-liveview-app.fly.dev"
+  PHX_HOST = "phoenix-pento.fly.dev"
   PORT = "8080"
 
 [experimental]
