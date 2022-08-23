@@ -7,6 +7,7 @@ defmodule Pento.Repo.Migrations.CreateProducts do
       add :description, :string
       add :unit_price, :float
       add :sku, :integer
+      add :image_upload, :string
 
       timestamps()
     end
